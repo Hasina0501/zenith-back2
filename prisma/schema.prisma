@@ -1,0 +1,6 @@
+model Admin {
+    id INt @id @default(autoincrement)
+    email String @unique
+    password String  @unique
+    createdAt DateTime @default(now())
+}
