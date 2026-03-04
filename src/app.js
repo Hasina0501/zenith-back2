@@ -1,6 +1,9 @@
 require('dotenv').config()
+const cors =require('cors')
 const express = require(`express`)
 const adminRoutes = require('./routes/admin.route')
+
+
 
 const app = express()
 app.use(express.json())
