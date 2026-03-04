@@ -1,6 +1,27 @@
-model Admin {
-    id INt @id @default(autoincrement)
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" // ou "postgresql" ou "sqlite" selon ta base
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+    id Int @id @default(autoincrement())
+    name String 
     email String @unique
     password String  @unique
+    role  role_admin @default(Admin)
     createdAt DateTime @default(now())
+    updated_at DateTime @default(now())
+}
+
+
+enum role_admin{
+    Admin
+    admin
+    Super_Admin
+    super_admin
 }

@@ -1,10 +1,13 @@
 require('dotenv').config()
-const express = require(`express`)
-const adminRoutes = require('./routes/admin.route')
-
+const express = require('express')
 const app = express()
 app.use(express.json())
 
-app.use('/api/admin', adminRoutes)
+
+const userRoutes = require('./routes/user.route')
+const authRoutes = require('./routes/auth.route')
+
+app.use('/api/user', userRoutes)
+app.use('/api/auth', authRoutes)
 
 module.exports = app

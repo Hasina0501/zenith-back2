@@ -1,4 +1,4 @@
-exports.success = (res, data, message = "Success", status = 200)=>{
+const success = async (res, data, message = "Success", status = 200)=>{
     return res.status(status).json({
         success: true,
         message,
@@ -6,9 +6,11 @@ exports.success = (res, data, message = "Success", status = 200)=>{
     })
 }
 
-exports.error = (res, message = "Error", status = 500) => {
+const error = async (res, message = "Error", status = 500) => {
     return res.status(status).json({
         success: false,
         message
     })
 }
+
+module.exports = {success, error}
