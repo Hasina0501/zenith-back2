@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,10 +8,114 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        Int      @id @default(autoincrement())
+  name      String
   email     String   @unique
-  name      String?
-  posts     String[]
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  offers Offer[]
+}
+
+model Offer {
+  id              Int      @id @default(autoincrement())
+  title           String
+  description     String
+  publicationDate DateTime
+  deadlineDate    DateTime
+  status          String
+  userId          Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id])
+  candidates Candidate[]
+  tests      Test[]
+}
+
+model Candidate {
+  id                Int      @id @default(autoincrement())
+  name              String
+  email             String
+  phone             String
+  cv                String
+  submissionDate    DateTime
+  applicationStatus String
+  offerId           Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  offer   Offer    @relation(fields: [offerId], references: [id])
+  results Result[]
+}
+
+model Form {
+  id        Int      @id @default(autoincrement())
+  name      String
+  active    Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fields FormField[]
+}
+
+model FormField {
+  id        Int      @id @default(autoincrement())
+  label     String
+  type      String
+  required  Boolean
+  formId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  form Form @relation(fields: [formId], references: [id])
+}
+
+model Test {
+  id        Int      @id @default(autoincrement())
+  title     String
+  type      String
+  active    Boolean
+  offerId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  offer     Offer      @relation(fields: [offerId], references: [id])
+  questions Question[]
+}
+
+model Question {
+  id           Int      @id @default(autoincrement())
+  content      String
+  questionType String
+  points       Int
+  testId       Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  test    Test     @relation(fields: [testId], references: [id])
+  answers Answer[]
+}
+
+model Answer {
+  id         Int      @id @default(autoincrement())
+  content    String
+  isCorrect  Boolean
+  questionId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  question Question @relation(fields: [questionId], references: [id])
+}
+
+model Result {
+  id          Int      @id @default(autoincrement())
+  score       Float
+  testDate    DateTime
+  candidateId Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  candidate Candidate @relation(fields: [candidateId], references: [id])
 }

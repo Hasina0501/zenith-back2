@@ -7,7 +7,10 @@
     "start": "node src/server.js",
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate",
-    "prisma:studio": "npx prisma studio"
+    "prisma:studio": "npx prisma studio",
+    "seed:offers": "node script.js seed",
+    "list:offers": "node script.js list",
+    "clear:offers": "node script.js clear"
   },
   "keywords": [],
   "author": "",
