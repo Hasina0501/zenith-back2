@@ -22,4 +22,25 @@ const createUser = async (payload)=>{
     })
 }
 
-module.exports = {getUser, createUser}
+
+const UpdateUser = async (id, data)=>{ 
+
+    
+    if(data.password){
+        const salt = await bcrypt.genSalt(10)
+
+        data.password = await bcrypt.hash(data.password, salt)
+    }
+    return await prisma.User.update({
+        where: { id },
+        data
+    })
+}
+
+const deleteUser = async (id)=>{
+    return await prisma.User.delete({
+        where: { id }
+    })
+}
+
+module.exports = {getUser, createUser, UpdateUser, deleteUser}

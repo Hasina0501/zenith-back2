@@ -1,4 +1,4 @@
-const {getUser, createUser} = require("../services/user.service")
+const {getUser, createUser, UpdateUser, deleteUser} = require("../services/user.service")
 
 const getUsers = async (req, res)=>{
     const user = await getUser()
@@ -26,4 +26,21 @@ const createUsers =async (req,res)=>{
         data: newUser
     })
 }
-module.exports = {getUsers, createUsers}
+
+const UpdateUsers = async (req, res)=>{
+    const id = parseInt(req.params.id)
+
+    const user = await UpdateUser(id, req.body)
+    res.status(200).json({message: "mise à jour éfféctuer"})
+}
+
+
+const deleteUsers = async (req,res)=>{
+    const id = parseInt(req.params.id)
+
+    await deleteUser(id)
+
+    res.status(200).json({message: "l'utilisateur a été supprimer"})
+}
+
+module.exports = {getUsers, createUsers, UpdateUsers, deleteUsers}
