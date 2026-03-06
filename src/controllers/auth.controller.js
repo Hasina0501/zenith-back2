@@ -11,7 +11,7 @@ const login = async (req, res) => {
         
         if(!email || !password) throw new Error("les champs sont requis"); //verification champ vide
         const connected =  await loginService(req.body)
-        return success(res, user, "vous etes connecter", 200);
+        return success(res, connected, "vous etes connecter", 200);
   
 };
 
