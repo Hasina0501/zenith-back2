@@ -8,6 +8,7 @@
   - [Admin Routes](#admin-routes)
   - [Candidate Routes](#candidate-routes)
   - [Offer Routes](#offer-routes)
+  - [Dashboard Routes](#dashboard-routes)
 - [Scripts de gestion](#scripts-de-gestion)
 - [Base de données](#base-de-données)
 
@@ -135,6 +136,44 @@ POST /api/offer/create_offer
   "deadlineDate": "2024-02-15T00:00:00Z",
   "status": "PUBLISHED",
   "userId": 1
+}
+```
+
+---
+
+### 📊 Dashboard Routes
+
+**Base Path :** `/api/dashboard`
+
+| Méthode | Endpoint | Description | Validation |
+|---------|----------|-------------|------------|
+| GET | `/candidates` | Liste des candidats avec pagination et filtres | ✅ |
+| GET | `/candidates/:id` | Détails complets d'un candidat | ❌ |
+| GET | `/candidates/:id/download-cv` | Télécharger le CV d'un candidat | ❌ |
+| GET | `/stats` | Statistiques du dashboard | ❌ |
+| PUT | `/candidates/:id/status` | Mettre à jour le statut d'un candidat | ✅ |
+
+#### 📝 Paramètres pour liste des candidats
+Query params optionnels :
+- `page` (Number) - Page par défaut : 1
+- `limit` (Number) - Nombre par défaut : 10 (max: 100)
+- `status` (String) - Filtre par statut : PENDING, REVIEWING, ACCEPTED, REJECTED
+- `search` (String) - Recherche par nom ou email
+
+**Exemple de requête :**
+```bash
+GET /api/dashboard/candidates?page=1&limit=10&status=PENDING&search=jean
+```
+
+#### 📝 Validation pour mise à jour de statut
+Champs requis :
+- `status` (String) - PENDING, REVIEWING, ACCEPTED, REJECTED
+
+**Exemple de requête :**
+```json
+PUT /api/dashboard/candidates/1/status
+{
+  "status": "REVIEWING"
 }
 ```
 
