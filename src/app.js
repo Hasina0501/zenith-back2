@@ -12,6 +12,11 @@ const offerRoutes = require("./routes/offer.route")
 // Route pour le dashboard
 const dashboardRoutes = require("./routes/dashboard.route")
 
+// Nouvelles routes pour la gestion des tests
+const testRoutes = require("./routes/test.route")
+const questionRoutes = require("./routes/question.route")
+const answerRoutes = require("./routes/answer.route")
+const resultRoutes = require("./routes/result.route")
 
 const app = express()
 app.use(cors())
@@ -30,5 +35,10 @@ app.use("/api/offer", offerRoutes)
 // Route pour le dashboard
 app.use("/api/dashboard", dashboardRoutes)
 
+// Routes pour la gestion des tests
+app.use("/api/test", testRoutes)
+app.use("/api/question", questionRoutes)
+app.use("/api/answer", answerRoutes)
+app.use("/api/result", resultRoutes)
 
 module.exports = app

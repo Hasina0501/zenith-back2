@@ -9,6 +9,10 @@
   - [Candidate Routes](#candidate-routes)
   - [Offer Routes](#offer-routes)
   - [Dashboard Routes](#dashboard-routes)
+  - [Test Routes](#-test-routes)
+  - [Question Routes](#-question-routes)
+  - [Answer Routes](#-answer-routes)
+  - [Result Routes](#-result-routes-soumission)
 - [Scripts de gestion](#scripts-de-gestion)
 - [Base de données](#base-de-données)
 
@@ -179,6 +183,133 @@ PUT /api/dashboard/candidates/1/status
 
 ---
 
+### 📝 Test Routes
+
+**Base Path :** `/api/test`
+
+| Méthode | Endpoint | Description | Validation |
+|---------|----------|-------------|------------|
+| POST | `/create_test` | Créer un test | ✅ |
+| GET | `/get_all_test` | Lister tous les tests | ❌ |
+| GET | `/get_one_test/:id` | Récupérer un test | ❌ |
+| PUT | `/update_test/:id` | Mettre à jour un test | ✅ |
+| DELETE | `/delete_test/:id` | Supprimer un test | ❌ |
+
+#### 📝 Validation pour création
+Champs requis :
+- `title` (String)
+- `type` (String)
+- `active` (Boolean)
+- `offerId` (Number)
+
+**Exemple de requête :**
+```json
+POST /api/test/create_test
+{
+  "title": "Test de base React",
+  "type": "QCM",
+  "active": true,
+  "offerId": 1
+}
+```
+
+---
+
+### ❓ Question Routes
+
+**Base Path :** `/api/question`
+
+| Méthode | Endpoint | Description | Validation |
+|---------|----------|-------------|------------|
+| POST | `/create_question` | Créer une question | ✅ |
+| GET | `/get_all_question` | Lister toutes les questions | ❌ |
+| GET | `/get_one_question/:id` | Récupérer une question | ❌ |
+| PUT | `/update_question/:id` | Mettre à jour une question | ✅ |
+| DELETE | `/delete_question/:id` | Supprimer une question | ❌ |
+
+#### 📝 Validation pour création
+Champs requis :
+- `content` (String)
+- `questionType` (String)
+- `points` (Number)
+- `testId` (Number)
+
+**Exemple de requête :**
+```json
+POST /api/question/create_question
+{
+  "content": "Qu'est-ce qu'un Hook React ?",
+  "questionType": "RADIO",
+  "points": 10,
+  "testId": 1
+}
+```
+
+---
+
+### 💡 Answer Routes
+
+**Base Path :** `/api/answer`
+
+| Méthode | Endpoint | Description | Validation |
+|---------|----------|-------------|------------|
+| POST | `/create_answer` | Créer une réponse | ✅ |
+| GET | `/get_all_answer` | Lister toutes les réponses | ❌ |
+| GET | `/get_one_answer/:id` | Récupérer une réponse | ❌ |
+| PUT | `/update_answer/:id` | Mettre à jour une réponse | ✅ |
+| DELETE | `/delete_answer/:id` | Supprimer une réponse | ❌ |
+
+#### 📝 Validation pour création
+Champs requis :
+- `content` (String)
+- `isCorrect` (Boolean)
+- `questionId` (Number)
+
+**Exemple de requête :**
+```json
+POST /api/answer/create_answer
+{
+  "content": "Une fonction spéciale qui permet de se brancher sur des fonctionnalités React",
+  "isCorrect": true,
+  "questionId": 1
+}
+```
+
+---
+
+### 🏆 Result Routes (Soumission)
+
+**Base Path :** `/api/result`
+
+| Méthode | Endpoint | Description | Validation |
+|---------|----------|-------------|------------|
+| POST | `/submit_test` | Soumettre un test et calculer le score | ✅ |
+| GET | `/get_all_result` | Lister tous les résultats | ❌ |
+| GET | `/get_one_result/:id` | Récupérer un résultat spécifique | ❌ |
+
+#### 📝 Validation pour soumission
+Champs requis :
+- `candidateId` (Number)
+- `testId` (Number)
+- `answers` (Array d'objets : `{ questionId, answerId }`)
+
+**Exemple de requête :**
+```json
+POST /api/result/submit_test
+{
+  "candidateId": 1,
+  "testId": 1,
+  "answers": [
+    {
+      "questionId": 1,
+      "answerId": 1
+    }
+  ]
+}
+```
+
+---
+
 ## 📊 Scripts de gestion
 
 ### Scripts npm disponibles
@@ -283,20 +414,15 @@ curl -X POST http://localhost:5000/api/offer/create_offer \
   }'
 ```
 
-### 2. Lister toutes les offres
+### 2. Créer un test pour une offre
 
 ```bash
-curl -X GET http://localhost:5000/api/offer/get_all_offer
-```
-
-### 3. Créer un candidat
-
-```bash
-curl -X POST http://localhost:5000/api/candidate/create_candidate \
+curl -X POST http://localhost:5000/api/test/create_test \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Marie Curie",
-    "email": "marie.curie@email.com",
+    "title": "Test de base React",
+    "type": "QCM",
+    "active": true,
     "offerId": 1
   }'
 ```
