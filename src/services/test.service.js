@@ -43,10 +43,40 @@ const deleteTest = async (id) => {
   })
 }
 
+// C'est pour creer un test avec ces données d'un coup (Plusieurs question , etc....)
+const createTestFull = async (data) => {
+  return prisma.test.create({
+    data: {
+      title: data.title,
+      type: data.type,
+      active: data.active,
+      offerId: data.offerId,
+      questions: {
+        create: data.questions.map((q) => ({
+          content: q.content,
+          questionType: q.questionType,
+          points: q.points,
+          answers: {
+            create: q.answers
+          }
+        }))
+      }
+    },
+    include: {
+      questions: {
+        include: {
+          answers: true
+        }
+      }
+    }
+  })
+}
+
 module.exports = {
   createTest,
   getAllTest,
   getTestId,
   updateTest,
-  deleteTest
+  deleteTest,
+  createTestFull
 }

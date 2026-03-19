@@ -190,6 +190,7 @@ PUT /api/dashboard/candidates/1/status
 | Méthode | Endpoint | Description | Validation |
 |---------|----------|-------------|------------|
 | POST | `/create_test` | Créer un test | ✅ |
+| POST | `/full` |Créer un test complet (test + questions + réponses) | ✅ |
 | GET | `/get_all_test` | Lister tous les tests | ❌ |
 | GET | `/get_one_test/:id` | Récupérer un test | ❌ |
 | PUT | `/update_test/:id` | Mettre à jour un test | ✅ |
@@ -210,6 +211,48 @@ POST /api/test/create_test
   "type": "QCM",
   "active": true,
   "offerId": 1
+}
+```
+
+```json
+POST /api/test/full
+{
+  "title": "Test Backend",
+  "type": "QCM",
+  "active": true,
+  "offerId": 1,
+  "questions": [
+    {
+      "content": "Qu'est-ce que Node.js ?",
+      "questionType": "MULTIPLE_CHOICE",
+      "points": 5,
+      "answers": [
+        {
+          "content": "Un runtime JavaScript",
+          "isCorrect": true
+        },
+        {
+          "content": "Un framework",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "content": "Prisma sert à quoi ?",
+      "questionType": "MULTIPLE_CHOICE",
+      "points": 5,
+      "answers": [
+        {
+          "content": "ORM base de données",
+          "isCorrect": true
+        },
+        {
+          "content": "Framework frontend",
+          "isCorrect": false
+        }
+      ]
+    }
+  ]
 }
 ```
 
