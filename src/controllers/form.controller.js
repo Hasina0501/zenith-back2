@@ -23,13 +23,13 @@ const getActive = async (req,res)=>{
 // creer une formulaire
 const create = async (req,res)=>{
    try {
-        const {name} = req.boby
+        const {name} = req.body
 
         if(!name) res.status(400).json({message: "veuillez remplir les champs"})
         
-        await createFrom(req.body)
+        const form = await createFrom(req.body)
 
-        return res.status(200).json({message: "formulaire creer avec succés"})
+        return res.status(200).json({message: "formulaire creer avec succés",data: form})
    } catch (error) {
         return res.status(500).json({error: error.message})
    }
@@ -56,9 +56,9 @@ const active = async (req,res)=>{
     try {
         const formId = req.params.id
 
-        await activeForm(formId)
+        await activeForm(Number(formId))
 
-        return res.status(2000).json({message: "formulaire activer"})
+        return res.status(200).json({message: "formulaire activer"})
     } catch (error) {
         return res.status(500).json({error: error.message})
     }

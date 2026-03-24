@@ -8,6 +8,7 @@ router.get("/get_form",FormController.getForm)
 router.get("/form_active", auth, FormController.getActive)
 router.post("/create_form", auth, FormController.create)
 router.put("/update_form/:id", auth, FormController.update)
+router.patch("/active_form/:id", auth, FormController.active)
 router.delete("/delete_form/:id", auth, FormController.delForm)
 
 
