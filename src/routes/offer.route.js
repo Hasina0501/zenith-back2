@@ -14,10 +14,10 @@ const auth = require("../middlewares/auth.middleware")
 router.post("/create_offer", auth, validateOffer, offerController.create)
 
 // Méthode pour récupérer toutes les offres
-router.get("/get_all_offer", auth, offerController.getAll)
+router.get("/get_all_offer", offerController.getAll)
 
 // Méthode pour récupérer une seule offre
-router.get("/get_one_offer/:id", auth, offerController.getOne)
+router.get("/get_one_offer/:id", offerController.getOne)
 
 // Méthode pour la mise à jour d'une offre
 router.put("/update_offer/:id", auth, validateOffer, offerController.update)

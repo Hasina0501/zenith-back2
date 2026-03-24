@@ -56,7 +56,7 @@ model Candidate {
 model Form {
   id        Int      @id @default(autoincrement())
   name      String
-  active    Boolean
+  active    Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -67,7 +67,7 @@ model FormField {
   id        Int      @id @default(autoincrement())
   label     String
   type      String
-  required  Boolean
+  required  Boolean  @default(false)
   formId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -123,6 +123,15 @@ model Result {
   candidate Candidate @relation(fields: [candidateId], references: [id])
 }
 
+model Captcha{
+  id Int  @id  @default(autoincrement())
+  answers  String
+  attemps  Int?  @default(0)
+  fingerprint String?
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
 enum role_admin{
     Admin
     admin

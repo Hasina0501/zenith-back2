@@ -15,10 +15,10 @@ const auth = require("../middlewares/auth.middleware")
 router.post("/create_question", auth, validateQuestion, questionController.create)
 
 // Méthode pour récupérer toutes les questions
-router.get("/get_all_question", auth, questionController.getAll)
+router.get("/get_all_question", questionController.getAll)
 
 // Méthode pour récupérer une seule question
-router.get("/get_one_question/:id", auth, questionController.getOne)
+router.get("/get_one_question/:id", questionController.getOne)
 
 // Méthode pour la mise à jour d'une question
 router.put("/update_question/:id", auth, validateQuestion, questionController.update)

@@ -9,4 +9,5 @@ router.post('/createUser',auth,super_admin, userController.createUsers)
 router.put("/updateUser/:id",auth,super_admin, userController.UpdateUsers)
 router.delete("/deleteUser/:id",auth,super_admin, userController.deleteUsers)
 
+
 module.exports = router

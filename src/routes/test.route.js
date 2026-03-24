@@ -18,7 +18,7 @@ router.post("/create_test", auth, validateTest, testController.create)
 router.get("/get_all_test", auth,testController.getAll)
 
 // Méthode pour récupérer un seul test
-router.get("/get_one_test/:id", auth, testController.getOne)
+router.get("/get_one_test/:id", testController.getOne)
 
 // Méthode pour la mise à jour d'un test
 router.put("/update_test/:id", auth, validateTest, testController.update)

@@ -13,7 +13,7 @@ const auth = require("../middlewares/auth.middleware")
 
 
 // Methode pour la creation d'un candidant
-router.post("/create_candidate", auth, validateCandidate, candidateController.create)
+router.post("/create_candidate", validateCandidate, candidateController.create)
 
 // Methode pour récupérer tous les canditats
 router.get("/get_all_candidate", auth, candidateController.getAll)
@@ -23,9 +23,9 @@ router.get("/get_one_candidate/:id", auth, candidateController.getOne)
 
 
 // Methode pour la mise à jour d'un candidats
-router.put("/update_candidate/:id", auth,  validateCandidate,candidateController.update)
+router.put("/update_candidate/:id", validateCandidate,candidateController.update)
 
 // Methode pour supprimer un candidat
-router.delete("/delete_candidate/:id", auth, candidateController.remove)
+router.delete("/delete_candidate/:id", candidateController.remove)
 
 module.exports = router
