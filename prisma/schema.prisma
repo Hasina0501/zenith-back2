@@ -15,7 +15,8 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  offers Offer[]
+  offers   Offer[]
+  articles Article[]
 }
 
 model Offer {
@@ -118,4 +119,16 @@ model Result {
   updatedAt   DateTime @updatedAt
 
   candidate Candidate @relation(fields: [candidateId], references: [id])
+}
+
+model Article {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  authorId  Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author User? @relation(fields: [authorId], references: [id])
 }

@@ -18,6 +18,9 @@ const questionRoutes = require("./routes/question.route")
 const answerRoutes = require("./routes/answer.route")
 const resultRoutes = require("./routes/result.route")
 
+// Route pour les articles
+const articleRoutes = require("./routes/article.route")
+
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -40,5 +43,8 @@ app.use("/api/test", testRoutes)
 app.use("/api/question", questionRoutes)
 app.use("/api/answer", answerRoutes)
 app.use("/api/result", resultRoutes)
+
+// Route pour les articles
+app.use("/api/article", articleRoutes)
 
 module.exports = app

@@ -145,6 +145,36 @@ POST /api/offer/create_offer
 
 ---
 
+### 📰 Article Routes
+
+**Base Path :** `/api/article`
+
+| Méthode | Endpoint | Description | Validation |
+|---------|----------|-------------|------------|
+| POST | `/create_article` | Créer un article | ✅ |
+| GET | `/get_all_article` | Lister tous les articles | ❌ |
+| GET | `/get_one_article/:id` | Récupérer un article | ❌ |
+| PUT | `/update_article/:id` | Mettre à jour un article | ✅ |
+| DELETE | `/delete_article/:id` | Supprimer un article | ❌ |
+
+#### 📝 Validation pour création et mise à jour
+Champs requis :
+- `title` (String)
+- `content` (String)
+
+**Exemple de requête :**
+```json
+POST /api/article/create_article
+{
+  "title": "Mon premier article",
+  "content": "Contenu de mon article ici",
+  "published": true,
+  "authorId": 1
+}
+```
+
+---
+
 ### 📊 Dashboard Routes
 
 **Base Path :** `/api/dashboard`
