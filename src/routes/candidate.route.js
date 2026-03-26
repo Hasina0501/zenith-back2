@@ -6,7 +6,6 @@ const candidateController = require("../controllers/candidate.controller")
 
 // pour la validation (champ requis pour la creation)
 const {validateCandidate} = require("../middlewares/candidate.middleware")
-
 // protection login
 const auth = require("../middlewares/auth.middleware")
 
@@ -20,7 +19,6 @@ router.get("/get_all_candidate", auth, candidateController.getAll)
 
 // Methode pour récupérer un seul candidat
 router.get("/get_one_candidate/:id", auth, candidateController.getOne)
-
 
 // Methode pour la mise à jour d'un candidats
 router.put("/update_candidate/:id", validateCandidate,candidateController.update)

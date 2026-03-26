@@ -36,10 +36,22 @@ const remove = asyncHandler(async (req, res) => {
   res.json({ message: "Test supprimé avec succès" })
 })
 
+// C'est le controlleur du teste d'un coup 😂
+const createTestFullController = asyncHandler(async (req, res) => {
+  const result = await testService.createTestFull(req.body)
+
+  res.status(201).json({
+    success: true,
+    message: "Test créé avec succès",
+    data: result
+  })
+})
+
 module.exports = {
   create,
   getAll,
   getOne,
   update,
-  remove
+  remove,
+  createTestFullController
 }

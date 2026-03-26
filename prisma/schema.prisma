@@ -17,8 +17,8 @@ model User {
     createdAt DateTime @default(now())
     updated_at DateTime @updatedAt
     offers Offer[]
+    articles Article[]
 }
-
 
 model Offer {
   id              Int      @id @default(autoincrement())
@@ -52,7 +52,6 @@ model Candidate {
   offer   Offer    @relation(fields: [offerId], references: [id])
   results Result[]
 }
-
 model Test {
   id        Int      @id @default(autoincrement())
   title     String
@@ -100,7 +99,6 @@ model Result {
 
   candidate Candidate @relation(fields: [candidateId], references: [id])
 }
-
 model Captcha{
   id Int  @id  @default(autoincrement())
   answers  String
@@ -110,6 +108,18 @@ model Captcha{
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
+model Article {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  authorId  Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author User? @relation(fields: [authorId], references: [id])
+}
+
 enum role_admin{
     Admin
     admin

@@ -13,6 +13,7 @@ const createCandidate = async (payload) => {
       },
       process.env.JWT_SECRET, //mot secret dans .env
     );
+    
     const candidate = await prisma.candidate.create({ 
         data:{
           email: email,

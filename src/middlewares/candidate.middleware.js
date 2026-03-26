@@ -1,6 +1,7 @@
 
 // pour la validation (champ requis pour la création)
-const validateCandidate = async (req, res, next) => {
+
+const validateCandidate = (req, res, next) => {
   const { name, email, offerId } = req.body
 
   if (!name || !email || !offerId) {
@@ -10,3 +11,4 @@ const validateCandidate = async (req, res, next) => {
 }
 
 module.exports = {validateCandidate}
+

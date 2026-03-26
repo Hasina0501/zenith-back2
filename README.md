@@ -5,11 +5,13 @@
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Routes API](#routes-api)
-  - [Admin Routes](#admin-routes)
+  - [User Routes](#User-routes)
+  - [Captcha Routes](#captcha-routes)
   - [Candidate Routes](#candidate-routes)
   - [Offer Routes](#offer-routes)
   - [Dashboard Routes](#dashboard-routes)
   - [Test Routes](#-test-routes)
+  - [captcha Routes](#-captcha-routes)
   - [Question Routes](#-question-routes)
   - [Answer Routes](#-answer-routes)
   - [Result Routes](#-result-routes-soumission)
@@ -61,17 +63,17 @@ http://localhost:5000
 
 ---
 
-### 👤 Admin Routes
+### 👤 User Routes
 
-**Base Path :** `/api/admin`
+**Base Path :** `/api/user`
 
 | Méthode | Endpoint | Description | Auth |
 |---------|----------|-------------|------|
-| POST | `/admin/register` | Créer un admin | ❌ |
-| POST | `/admin/login` | Connexion admin | ❌ |
-| GET | `/admin/profile` | Profil admin | ✅ |
-| PUT | `/admin/update` | Mettre à jour admin | ✅ |
-| DELETE | `/admin/delete` | Supprimer admin | ✅ |
+| GET | `/` | get all users | ✅ |
+| POST | `/createUser` | Créer un user | ❌ |
+| POST | `/user/login` | Connexion user | ❌ |
+| PUT | `/updateUser/id` | Mettre à jour user | ✅ |
+| DELETE | `/deleteUser/id` | Supprimer user | ✅ |
 
 ---
 
@@ -145,6 +147,36 @@ POST /api/offer/create_offer
 
 ---
 
+### 📰 Article Routes
+
+**Base Path :** `/api/article`
+
+| Méthode | Endpoint | Description | Validation |
+|---------|----------|-------------|------------|
+| POST | `/create_article` | Créer un article | ✅ |
+| GET | `/get_all_article` | Lister tous les articles | ❌ |
+| GET | `/get_one_article/:id` | Récupérer un article | ❌ |
+| PUT | `/update_article/:id` | Mettre à jour un article | ✅ |
+| DELETE | `/delete_article/:id` | Supprimer un article | ❌ |
+
+#### 📝 Validation pour création et mise à jour
+Champs requis :
+- `title` (String)
+- `content` (String)
+
+**Exemple de requête :**
+```json
+POST /api/article/create_article
+{
+  "title": "Mon premier article",
+  "content": "Contenu de mon article ici",
+  "published": true,
+  "authorId": 1
+}
+```
+
+---
+
 ### 📊 Dashboard Routes
 
 **Base Path :** `/api/dashboard`
@@ -190,6 +222,7 @@ PUT /api/dashboard/candidates/1/status
 | Méthode | Endpoint | Description | Validation |
 |---------|----------|-------------|------------|
 | POST | `/create_test` | Créer un test | ✅ |
+| POST | `/full` |Créer un test complet (test + questions + réponses) | ✅ |
 | GET | `/get_all_test` | Lister tous les tests | ❌ |
 | GET | `/get_one_test/:id` | Récupérer un test | ❌ |
 | PUT | `/update_test/:id` | Mettre à jour un test | ✅ |
@@ -213,6 +246,49 @@ POST /api/test/create_test
 }
 ```
 
+```json
+POST /api/test/full
+{
+  "title": "Test Backend",
+  "type": "QCM",
+  "active": true,
+  "offerId": 1,
+  "questions": [
+    {
+      "content": "Qu'est-ce que Node.js ?",
+      "questionType": "MULTIPLE_CHOICE",
+      "points": 5,
+      "answers": [
+        {
+          "content": "Un runtime JavaScript",
+          "isCorrect": true
+        },
+        {
+          "content": "Un framework",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "content": "Prisma sert à quoi ?",
+      "questionType": "MULTIPLE_CHOICE",
+      "points": 5,
+      "answers": [
+        {
+          "content": "ORM base de données",
+          "isCorrect": true
+        },
+        {
+          "content": "Framework frontend",
+          "isCorrect": false
+        }
+      ]
+    }
+  ]
+}
+```
+
+>>>>>>> 558dc27832dcf08237fa50169c578da40deec937
 ---
 
 ### ❓ Question Routes

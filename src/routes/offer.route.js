@@ -6,6 +6,7 @@ const offerController = require("../controllers/offer.controller")
 
 // Pour la validation des champs requis pour la création
 const validateOffer = require("../middlewares/offer.middleware")
+
 // protection login
 const auth = require("../middlewares/auth.middleware")
 

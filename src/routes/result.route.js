@@ -10,7 +10,6 @@ const validateResult = require("../middlewares/result.middleware")
 // protection login
 const auth = require("../middlewares/auth.middleware")
 
-
 // Méthode pour la soumission d'un test
 router.post("/submit_test", validateResult, resultController.submit)
 
