@@ -8,7 +8,8 @@ const loginService = async (payload)=>{
     const user = await prisma.User.findUnique({ where: { email } }); //trouver l' email
     const validPassword = await bcrypt.compare(password, user.password); //verifier le password
 
-    if (!validPassword) res.status(500).json({message: "mot de passe incorrect"});  // si password incorect
+    if (!validPassword) throw new Error("mot de passe incorrect");  // si password incorect
+    
     //creation du token unique
     const token = jwt.sign(
         {
@@ -19,22 +20,16 @@ const loginService = async (payload)=>{
     { expiresIn: "1d" }  // exipire dans 1jour
 );
 
-    // met à jour le status dans user
-    await prisma.User.update({
-        where: { id: user.id },
-        data: { isLoggedIn: true}
-    })
-
     return {token}
 }
 
+
 //  fonction de deconnexion
 const logoutService = async (userId)=>{
-    await prisma.User.update({
-        where: { id: userId },
-        data: { isLoggedIn: false}  // met à jour le status
-    })
+    return "deconnexion"
 } 
+
+
 // supprimer le token en front
 
 

@@ -1,4 +1,5 @@
 const candidateService = require("../services/candidate.service")
+const {generateEmail, sendMail} = require("../services/mail.service")
 
 // on utilise ceci au lieu de faire des try, catch a chaque fois 
 const asyncHandler = require("../utils/asyncHandler")
@@ -6,7 +7,9 @@ const asyncHandler = require("../utils/asyncHandler")
 
 // Fonction pour la creation d'un nouveau candidat
 const create = asyncHandler(async (req, res) => {
+  const {email, name, phone, cv, applicationStatus, offerId} = req.body
   const candidate = await candidateService.createCandidate(req.body)
+  await sendMail(email, (await generateEmail(email)).testLink)
   res.status(201).json(candidate)
 })
 

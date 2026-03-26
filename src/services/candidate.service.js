@@ -1,8 +1,31 @@
 const prisma = require("../config/prisma")
+const jwt = require("jsonwebtoken")
 
 // Creer un nouveau candidat
-const createCandidate = async (data) => {
-  return prisma.candidate.create({ data })
+const createCandidate = async (payload) => {
+  
+  const {email, name, phone, cv, applicationStatus, offerId} = payload
+  
+  //creation du token unique
+  const token = jwt.sign(
+    {
+        email: payload.email, 
+      },
+      process.env.JWT_SECRET, //mot secret dans .env
+    );
+    const candidate = await prisma.candidate.create({ 
+        data:{
+          email: email,
+          name: name,
+          phone: phone,
+          cv: cv,
+          applicationStatus: applicationStatus,
+          offerId: offerId,
+          token: token
+        }
+      })
+  
+  return {candidate,token}
 }
 
 
