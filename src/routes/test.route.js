@@ -22,7 +22,11 @@ router.put("/update_test/:id", validateTest, testController.update)
 // Méthode pour supprimer un test
 router.delete("/delete_test/:id", testController.remove)
 
-// Methode pour le teste d'un coup 🤣🤣
+// Méthodes pour le test d'un coup (Test + Questions + Réponses) 🤣🤣
 router.post("/full", testController.createTestFullController)
+router.get("/full/get_all", testController.getAllFullController)
+router.get("/full/get_one/:id", testController.getOneFullController)
+router.put("/full/update/:id", validateTest, testController.updateFullController)
+router.delete("/full/delete/:id", testController.deleteFullController)
 
 module.exports = router

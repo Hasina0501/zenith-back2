@@ -48,11 +48,53 @@ const createTestFullController = asyncHandler(async (req, res) => {
   })
 })
 
+// Pour récupérer tous les tests complets
+const getAllFullController = asyncHandler(async (req, res) => {
+  const tests = await testService.getAllTestFull()
+  res.json({
+    success: true,
+    data: tests
+  })
+})
+
+// Pour récupérer un seul test complet
+const getOneFullController = asyncHandler(async (req, res) => {
+  const test = await testService.getTestFullById(req.params.id)
+  if (!test) return res.status(404).json({ success: false, message: "Test introuvable" })
+  res.json({
+    success: true,
+    data: test
+  })
+})
+
+// Pour la mise à jour d'un test complet
+const updateFullController = asyncHandler(async (req, res) => {
+  const test = await testService.updateTestFull(req.params.id, req.body)
+  res.json({
+    success: true,
+    message: "Test complet mis à jour avec succès",
+    data: test
+  })
+})
+
+// Pour supprimer un test complet
+const deleteFullController = asyncHandler(async (req, res) => {
+  await testService.deleteTestFull(req.params.id)
+  res.json({
+    success: true,
+    message: "Test complet supprimé avec succès"
+  })
+})
+
 module.exports = {
   create,
   getAll,
   getOne,
   update,
   remove,
-  createTestFullController
+  createTestFullController,
+  getAllFullController,
+  getOneFullController,
+  updateFullController,
+  deleteFullController
 }

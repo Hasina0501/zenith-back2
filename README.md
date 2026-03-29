@@ -220,11 +220,15 @@ PUT /api/dashboard/candidates/1/status
 | Méthode | Endpoint | Description | Validation |
 |---------|----------|-------------|------------|
 | POST | `/create_test` | Créer un test | ✅ |
-| POST | `/full` |Créer un test complet (test + questions + réponses) | ✅ |
 | GET | `/get_all_test` | Lister tous les tests | ❌ |
 | GET | `/get_one_test/:id` | Récupérer un test | ❌ |
 | PUT | `/update_test/:id` | Mettre à jour un test | ✅ |
 | DELETE | `/delete_test/:id` | Supprimer un test | ❌ |
+| POST | `/full` | Créer un test complet (test + questions + réponses) | ✅ |
+| GET | `/full/get_all` | Lister tous les tests complets | ❌ |
+| GET | `/full/get_one/:id` | Récupérer un test complet avec détails | ❌ |
+| PUT | `/full/update/:id` | Mettre à jour un test complet | ✅ |
+| DELETE | `/full/delete/:id` | Supprimer un test complet (en cascade) | ❌ |
 
 #### 📝 Validation pour création
 Champs requis :
