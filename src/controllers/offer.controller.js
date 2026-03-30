@@ -30,6 +30,13 @@ const update = asyncHandler(async (req, res) => {
   res.json(offer)
 })
 
+// Pour la mise à jour du statut 
+const updateStatus = asyncHandler(async (req, res) =>{
+  const offer = await offerService.updateOffer(
+    req.params.id, req.body
+  )
+})
+
 // Pour supprimer une offre
 const remove = asyncHandler(async (req, res) => {
   await offerService.deleteOffer(req.params.id)
@@ -41,5 +48,6 @@ module.exports = {
   getAll,
   getOne,
   update,
+  updateStatus,
   remove
 }

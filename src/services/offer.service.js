@@ -38,6 +38,15 @@ const updateOffer = async (id, data) => {
   })
 }
 
+// Mise à jour du statut  d'une offre
+const updateOfferStatus = async (id, data) => {
+  return await prisma.offer.update({
+    where: { id: id},
+    data: {status: data.status}
+  })
+}
+
+
 // Supprimer une offre
 const deleteOffer = async (id) => {
   return prisma.offer.delete({
@@ -50,5 +59,6 @@ module.exports = {
   getAllOffer,
   getOfferId,
   updateOffer,
+  updateOfferStatus,
   deleteOffer
 }

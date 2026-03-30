@@ -25,18 +25,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Route pour les candidats
-const candidateRoutes = require("./routes/candidate.route")
-// Route pour les offres
-const offerRoutes = require("./routes/offer.route")
-// Route pour le dashboard
-const dashboardRoutes = require("./routes/dashboard.route")
-// Nouvelles routes pour la gestion des tests
-const testRoutes = require("./routes/test.route")
-const questionRoutes = require("./routes/question.route")
-const answerRoutes = require("./routes/answer.route")
-const resultRoutes = require("./routes/result.route")
-
 
 const userRoutes = require('./routes/user.route')
 const authRoutes = require('./routes/auth.route')

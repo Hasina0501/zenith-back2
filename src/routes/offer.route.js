@@ -23,6 +23,9 @@ router.get("/get_one_offer/:id", offerController.getOne)
 // Méthode pour la mise à jour d'une offre
 router.put("/update_offer/:id", auth, validateOffer, offerController.update)
 
+// Methode pour la mise à jour du statut d'une offre
+router.patch("/update_status_offer/:id", auth, offerController.updateStatus)
+
 // Méthode pour supprimer une offre
 router.delete("/delete_offer/:id", auth, offerController.remove)
 
