@@ -6,6 +6,7 @@
 - [Configuration](#configuration)
 - [Routes API](#routes-api)
   - [User Routes](#User-routes)
+  - [Auth Routes](#Auth-routes)
   - [Captcha Routes](#captcha-routes)
   - [Candidate Routes](#candidate-routes)
   - [Offer Routes](#offer-routes)
@@ -71,9 +72,20 @@ http://localhost:5000
 |---------|----------|-------------|------|
 | GET | `/` | get all users | ✅ |
 | POST | `/createUser` | Créer un user | ❌ |
-| POST | `/user/login` | Connexion user | ❌ |
 | PUT | `/updateUser/id` | Mettre à jour user | ✅ |
 | DELETE | `/deleteUser/id` | Supprimer user | ✅ |
+
+---
+
+
+### 👤 Auth Routes
+
+**Base Path :** `/api/auth`
+
+| Méthode | Endpoint | Description | Auth |
+|---------|----------|-------------|------|
+| POSt | `/login` | login user 
+| POST | `/logout` | logout user | ✅ |
 
 ---
 
