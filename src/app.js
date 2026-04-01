@@ -23,6 +23,9 @@ const articleRoutes = require("./routes/article.route")
 
 const app = express()
 app.use(cors())
+app.use(cors({
+    origin: "Zenithproject.netlify.app"
+}))
 app.use(express.json())
 
 
