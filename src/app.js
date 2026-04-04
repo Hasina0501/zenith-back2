@@ -24,8 +24,11 @@ const articleRoutes = require("./routes/article.route")
 const app = express()
 app.use(cors())
 app.use(cors({
-    origin: "Zenithproject.netlify.app"
-}))
+  origin: "https://zenithproject.netlify.app", // URL complète avec https
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true // Utile si tu gères des cookies ou sessions plus tard
+}));
 app.use(express.json())
 
 
